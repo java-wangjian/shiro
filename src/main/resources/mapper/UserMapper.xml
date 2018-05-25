@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ ==============================================================
+  ~ Copyright (c) 2012 ~ 2018. anyuncloud.com All rights reserved.
+  ~                                           Created by wangjian
+  ~ ==============================================================
+  -->
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wangshi.shiro.mapper.UserMapper">
+    <resultMap id="userMap" type="com.wangshi.shiro.model.User">
+        <id property="uid" column="uid"></id>
+        <result property="username" column="useername"></result>
+        <result property="password" column="password"></result>
+        <collection property="roles" ofType="com.wangshi.shiro.model.Role">
+            <id property="rid" column="rid"></id>
+            <result property="rname" column="rname"></result>
+            <collection property="parmissions" ofType="com.wangshi.shiro.model.Permission">
+                <id property="pid" column="pid"></id>
+                <result property="name" column="name"></result>
+                <result property="url" column="url"></result>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <select id="findByUsername" parameterType="String" resultMap="userMap"></select>
+</mapper>
